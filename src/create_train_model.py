@@ -4,19 +4,19 @@ from keras.layers import LSTM, Dropout, Dense
 
 class MusicModel:
 
-    def __init__(self, notes_with_indexes):
-        self.notes_with_indexes = notes_with_indexes
+    def __init__(self, n_vocab):
+        self.n_vocab = n_vocab
         self.model = None
 
-    def create_and_train_model(self, x_new):
+    def create_and_train_model(self, network_input):
         # create the model
         self.model = Sequential()
-        self.model.add(LSTM(256, return_sequences=True, input_shape=(x_new.shape[1], x_new.shape[2])))
+        self.model.add(LSTM(256, return_sequences=True, input_shape=(network_input.shape[1], network_input.shape[2])))
         self.model.add(Dropout(0.2))
         self.model.add(LSTM(256))
         self.model.add(Dropout(0.2))
         self.model.add(Dense(256, activation='relu'))
-        self.model.add(Dense(len(self.notes_with_indexes), activation='softmax'))
+        self.model.add(Dense(self.n_vocab, activation='softmax'))
         self.model.summary()
 
     def train_model(self, x_train, x_test, y_train, y_test):

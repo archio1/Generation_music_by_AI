@@ -71,12 +71,12 @@ class MusicProcessor:
                     offset_base = element.offset
 
         with open('../data/notes.json', 'w') as f:
-            json.dump(notes, f)
+            json.dump(notes, f, indent=4)
 
         with open('../data/durations.json', 'w') as f:
-            json.dump(durations, f)
+            json.dump(durations, f, indent=4)
 
         with open('../data/offsets.json', 'w') as f:
-            json.dump(offsets, f)
+            json.dump(offsets, f, indent=4)
 
         return notes
