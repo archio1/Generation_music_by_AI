@@ -124,7 +124,7 @@ def prepare_sequences(notes, n_vocab):
     network_input = np.reshape(network_input, (n_patterns, sequence_length, 1))
     network_output = np.reshape(network_output, (-1, 1))
     # normalize input
-    # network_input = network_input / float(n_vocab)
+    network_input = network_input / float(n_vocab)
 
     # network_output = np_util.to_categorical(network_output)
 
@@ -168,12 +168,12 @@ if __name__ == '__main__':
     network_input, network_output = prepare_sequences(all_notes, n_vocab)
     x_train, x_test, y_train, y_test = get_train_test_sets(network_input, network_output)
     # Model
-    create_model = MusicModel(n_vocab)
-    create_model.create_and_train_model(network_input)
-    x_train_list = x_train.tolist()
-    x_test_list = x_test.tolist()
-    create_model.train_model(x_train, x_test, y_train, y_test)
-    create_model.save_model()
+    # create_model = MusicModel(n_vocab)
+    # create_model.create_and_train_model(network_input)
+    # # x_train_list = x_train.tolist()
+    # # x_test_list = x_test.tolist()
+    # create_model.train_model(x_train, x_test, y_train, y_test)
+    # create_model.save_model()
     gen_music = NotesGenerator('s2s')
     gen_notes = gen_music.generate_notes(network_input, pitchnames, n_vocab)
     gen_music.create_midi(gen_notes)

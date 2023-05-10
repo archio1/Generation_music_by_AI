@@ -19,15 +19,12 @@ class NotesGenerator:
         # generate 500 notes
         for note_index in range(500):
             prediction_input = np.reshape(pattern, (1, len(pattern), 1))
-            # prediction_input = prediction_input / float(n_vocab)
-
+            prediction_input = prediction_input / float(n_vocab)
             prediction = self.model.predict(prediction_input, verbose=0)
-
             index = np.argmax(prediction)
             result = int_to_note[index]
             prediction_output.append(result)
-
-            pattern.append(index)
+            pattern = np.append(pattern, index)
             pattern = pattern[1:len(pattern)]
 
         return prediction_output
